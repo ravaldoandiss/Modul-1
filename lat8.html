@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan </title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <h3>Masukkan nama : </h3>
+        <form v-on:submit.prevent>
+            <input type="text" @keyup.enter="simpan" v-model="nama">
+            <button type="button" @click="simpan">Simpan</button>
+        </form>
+        <br><br>
+
+        <table border="1" style="border-collapse: collapse;" v-if="datanama.length > 0">
+            <tr>
+                <thead>
+                    <th style="width:30px">#</th>
+                    <th style="width:200px">Nama </th>
+                </thead>
+            </tr>
+            <tr>
+                <tbody v-for="(data, index) in datanama" :key="index">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ data }}</td>
+                </tbody>
+            </tr>
+        </table>        
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            methods: {
+                simpan: function() {
+                    this.datanama.push(this.nama);
+                    this.nama = "";
+                }
+            },
+            data: {
+                datanama : ['Arya', 'Budi', 'Cici', 'Diah', 'Eko'],
+                nama : ''
+            }            
+        })
+        
+    </script>
+</body>
+</html>
